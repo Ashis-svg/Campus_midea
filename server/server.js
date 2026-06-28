@@ -99,10 +99,70 @@ app.get("/student/mess/:id", (req, res) => {
   });
 });
 
-app.post("/student/mess/:id",(req,res)=>{
-  const {reg_no}=req.params;
-  const {attendence,formdata}=req.body;
-})
+app.post("/student/mess/:id", (req, res) => {
+  const reg_no = req.params.id;
+  const { attendence, formData } = req.body;
+
+  // Attendance
+  if (attendence) {
+    const meal = attendence[0];   // Breakfast/Lunch/Dinner
+    const status = attendence[1]; // 0 or 1
+
+    let column = "";
+
+    if (meal === "Breakfast") column = "breakfast";
+    else if (meal === "Lunch") column = "lunch";
+    else column = "dinner";
+
+    const attendanceSql = `
+        INSERT INTO mess_attendance
+        (reg_no, attendance_date, ${column})
+        VALUES (?, CURDATE(), ?)
+        ON DUPLICATE KEY UPDATE
+        ${column} = VALUES(${column});
+    `;
+
+    db.query(attendanceSql, [reg_no, status], (err) => {
+        if (err) console.log(err);
+    });
+}
+  // Rating
+ if (formData.rating) {
+
+    const ratingSql = `
+        INSERT INTO mess_rating
+        (reg_no, rating_date, rating)
+        VALUES (?, CURDATE(), ?)
+        ON DUPLICATE KEY UPDATE
+        rating = VALUES(rating);
+    `;
+
+    db.query(ratingSql, [reg_no, formData.rating], (err) => {
+        if (err) console.log(err);
+    });
+}
+
+  // Feedback
+  if (formData.comment && formData.comment.trim() !== "") {
+
+    const feedbackSql = `
+        INSERT INTO mess_feedback
+        (reg_no, message, message_date)
+        VALUES (?, ?, CURDATE())
+        ON DUPLICATE KEY UPDATE
+        message = VALUES(message);
+    `;
+
+    db.query(feedbackSql, [reg_no, formData.comment], (err) => {
+        if (err) console.log(err);
+    });
+}
+
+  res.json({
+    success: true,
+    message: "Data saved successfully."
+  });
+});
 
 app.listen(PORT,()=>{
     console.log(`app is running on ${PORT}`)

@@ -6,7 +6,7 @@ const StudentMess = () => {
   const { id } = useParams();
 
   const [menu, setMenu] = useState([]);
-  const[attendence,setAttendence]=useState();
+  const[attendence,setAttendence]=useState([]);
   const[flag,setFlag]=useState(true);
   const[formData,setFormData]=useState({
     comment: "",
@@ -167,17 +167,17 @@ const handleSubmit = (e) => {
     {/* Your Feedback */}
     <div className="bg-gray-900 rounded-xl shadow-lg p-6">
       <h2 className="text-2xl font-bold mb-4 text-green-400">
-        Your Feedback
+        My Feedback
       </h2>
 
       <div className="space-y-4">
         <div>
-          <h3 className="text-lg font-semibold">Your Rating</h3>
+          <h3 className="text-lg font-semibold">My Ratings</h3>
           <p className="text-gray-300">⭐⭐⭐⭐☆ (4/5)</p>
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold">Your Comment</h3>
+          <h3 className="text-lg font-semibold">My Comments</h3>
           <p className="text-gray-300 bg-gray-800 p-3 rounded-lg">
             The food quality was good today. The dinner was especially delicious.
           </p>
@@ -281,13 +281,13 @@ const handleSubmit = (e) => {
 
         <button onClick={()=>{
             setFlag(!flag);
-            setAttendence(1);
+            setAttendence([meal.meal,1]);
         }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5">
           Yes
         </button>
         <button onClick={()=>{
           setFlag(!flag)
-          setAttendence(0)
+          setAttendence([meal.meal,0])
         }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5">
           No
         </button>
