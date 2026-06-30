@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const StudentMess = () => {
+const StudentComplain = () => {
   const { id } = useParams();
 
   const [menu, setMenu] = useState([]);
@@ -337,4 +337,4 @@ const StudentMess = () => {
   );
 };
 
-export default StudentMess;
+export default StudentComplain;

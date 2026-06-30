@@ -12,7 +12,7 @@ const StudentHome = () => {
         <button onClick={()=>nevigate(`/student/mess/${id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5">
   Mess
 </button>
-<button onClick={()=>nevigate("/student/complain")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5">
+<button onClick={()=>nevigate(`/student/complain/${id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5">
   Complain
 </button>
 

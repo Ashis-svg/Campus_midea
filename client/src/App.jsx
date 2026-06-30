@@ -9,6 +9,7 @@ import AdminLogin from './pages/admin_pages/AdminLogin';
 import StudentHome from './pages/student_pages/StudentHome';
 import Error from './pages/Error'
 import StudentMess from './pages/student_pages/StudentMess';
+import StudentComplain from './pages/student_pages/StudentComplain';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/admin/register" element={<AdminRegister />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path='/student/mess/:id' element={<StudentMess/>}/>
+        <Route path='/student/complain/:id' element={<StudentComplain/>}/>
       </Routes>
     </BrowserRouter>
   );
